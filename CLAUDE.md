@@ -11,7 +11,12 @@ This is a pure Go library project with no main executable. It provides reusable 
 The project follows a standard Go library pattern:
 
 - **`stringutilpankaj/`**: Package providing string manipulation utilities
-  - `capitalize.go`: Functions for capitalizing strings (single character or all words)
+  - Functions for capitalizing, uppercasing, and lowercasing strings
+- **`intutil/`**: Package providing integer utilities
+  - Random number generation (single, range, slices)
+  - Math operations (abs, max, min, clamp)
+  - Number properties (even, odd, prime)
+  - Advanced math (factorial, GCD, LCM)
 
 This is a **library-only project** with no main.go. To use this library, other projects would import it via Go modules.
 
@@ -25,7 +30,8 @@ go build ./...              # Build all packages
 ### Testing
 ```bash
 go test ./...               # Run all tests in the project
-go test ./stringutilpankaj  # Test specific package
+go test ./stringutilpankaj  # Test string utilities package
+go test ./intutil           # Test integer utilities package
 go test -v ./...            # Verbose test output
 ```
 
@@ -43,16 +49,27 @@ go vet ./...                # Run Go vet for common issues
 
 ## Package Usage Pattern
 
-To use the `stringutilpankaj` package in other parts of the code:
+Import packages from this library:
 
 ```go
-import "go-practice-project-as-library/stringutilpankaj"
+import (
+    "github.com/pankajy-dev/go-practice-project-as-library/stringutilpankaj"
+    "github.com/pankajy-dev/go-practice-project-as-library/intutil"
+)
 
-capitalized := stringutilpankaj.Capitalize("hello")        // "Hello"
-titleCase := stringutilpankaj.CapitalizeWords("hello world") // "Hello World"
+// String utilities
+capitalized := stringutilpankaj.Capitalize("hello")           // "Hello"
+titleCase := stringutilpankaj.CapitalizeWords("hello world")  // "Hello World"
+upper := stringutilpankaj.ToUpper("hello")                    // "HELLO"
+
+// Integer utilities
+random := intutil.Random(1, 100)                              // Random number between 1-100
+isPrime := intutil.IsPrime(17)                                // true
+factorial := intutil.Factorial(5)                             // 120
+gcd := intutil.GCD(48, 18)                                    // 6
 ```
 
-Note: The module name is `go-practice-project-as-library` (from go.mod), so imports use this as the base path.
+The `intutil` package has a short name for convenient use without an alias.
 
 ## Adding New Utilities
 
